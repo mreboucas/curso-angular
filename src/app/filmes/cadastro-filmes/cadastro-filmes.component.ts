@@ -31,6 +31,17 @@ export class CadastroFilmesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.cadastro = this.fb.group({
+      titulo : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(256)]],
+      urlFoto: ['', [Validators.minLength(10)]],
+      dtLancamento: ['', [Validators.required]],
+      descricaco: [''],
+      nota: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
+      urlIMb: ['', [Validators.minLength(10)]],
+      genero: ['', [Validators.required]]
+    })
+
     this.id = this.activatedRoute.snapshot.params['id'];
     if (this.id) {
       this.filmeService.visualizar(this.id)
