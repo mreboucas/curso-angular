@@ -1,40 +1,45 @@
 <mat-toolbar class="app-title">Cadastrar Filme</mat-toolbar>
 <div class="main-div">
-  <mat-card class="center width50" >
+  <mat-card class="center width50" *ngIf="cadastro">
+      <form autocomplete="false" novalidate [formGroup]="cadastro" (ngSubmit)="submit()" (ngReset)="reiniciarForm()" class="width-form-70">
+      
       <mat-card-content>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Título">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Link Foto">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-              <input matInput [matDatepicker]="picker" placeholder="Data de Lançamento">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="Descrição"></textarea>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Nota IMDb">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Link IMDb">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Gênero">
-              <mat-option value="Ação">Açao</mat-option>
-              <mat-option value="Aventura">Aventura</mat-option>
-              <mat-option value=">Ficção Científica">Ficção Científica</mat-option>
-              <mat-option value="Romance">Romance</mat-option>
-              <mat-option value="Terror">Terror</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card-content>
-        <mat-card-actions>
-          <button color="accent" mat-raised-button>Salvar</button>
-          <button color="warn" mat-raised-button>Cancelar</button>
-        </mat-card-actions>
+        <dio-input-text titulo="Título *" controlName="titulo" [formGroup]="cadastro"></dio-input-text>
+        <dio-input-text titulo="Link Foto" controlName="urlFoto" [formGroup]="cadastro"></dio-input-text>
+        <dio-input-date titulo="Data de Lançamento *" controlName="dtLancamento" [formGroup]="cadastro"></dio-input-date>
+        <dio-input-text-area titulo="Descrição" controlName="descricao" [formGroup]="cadastro"></dio-input-text-area>
+        <dio-input-number titulo="Nota IMBDb *" controlName="nota" step="0.1" [formGroup]="cadastro"></dio-input-number>
+        <dio-input-text titulo="Link IMBDb" controlName="urlIMDb" [formGroup]="cadastro"></dio-input-text>
+        <dio-input-select titulo="Gênero *" [opcoes]="generos" controlName="genero" [formGroup]="cadastro"></dio-input-select>
+        <mat-form-field class="full-width">
+         <input matInput placeholder="Nome Abreviado" name="nomeCompleto" formControlName="nomeCompleto">
+        </mat-form-field> 
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nome Abreviado" name="nomeAbreviado" [value]="nomeAbreviado || '' ">
+        </mat-form-field>
+          <div class="row">
+            <div class="col-12 p-0 upload-wrapper">
+              <label for="btn-tirar-foto" class="btn btn-link btb-link btb-link--wine float-right d-block d-lg-none"
+                >Tirar foto</label>
+              <input type="file" capture="camera" accept="image/*" class="upload-wrapper--file d-block d-lg-none"
+                 id="btn-tirar-foto" name="tirar-foto"
+                alt="Tirar foto" (change)="uploadFoto($event)" />
+              <!-- <label for="btn-incluir-arquivo" *featureToggle="'multiplas-fotos-mobile'" class="btn btn-link btb-link btb-link--wine float-right">Anexar
+                arquivo</label>
+              <input type="file" *featureToggle="'multiplas-fotos-mobile'" class="upload-wrapper--file" #uploadFile id="btn-incluir-arquivo" name="incluir-arquivo"
+                alt="Incluir arquivo" accept="image/png, image/jpeg, image/jpg, image/gif, application/pdf"
+                (change)="upload($event)" /> -->
+            </div>
+          </div>
+      </mat-card-content>
+      
+   
+      <mat-card-actions>
+        <button type="submit" color="accent" mat-raised-button>Salvar</button>
+        <button type="reset" color="warn" mat-raised-button>Cancelar</button>
+        <button type="button" (click)="abreviarNome()" color="accent" mat-raised-button>Abreviar</button>
+      </mat-card-actions>
+   
+    </form>
   </mat-card>
 </div>

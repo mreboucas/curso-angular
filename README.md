@@ -25,3 +25,19 @@ Execute `ng generate component nome-do-componente` para criar um novo componente
 
 Execute `ng build` para gerar o compilado do projeto. O projeto vai ser criado dentro do diretório `dist/`. Adicionar `--prod` junto comando de build para gerar minificado e pronto para o ambiente de produção.
 
+## Gerando um módulo
+ng g m shared/components/campos/
+--> Gera um módulo campos.module.ts
+
+## Gerando um componente
+ ng g c shared/components/campos/input-text
+--> Gera um componente input-text.component.ts
+--> Coloca o componente importado no módulo campos.module.ts
+## Gerendo um componente sem módulo na pasta (especificando um módulo na mão)
+ng g c shared/components/alerta --module app
+## JSON Server
+json-server --watch db.json
+
+Link:
+JSON-SERVER:
+https://github.com/typicode/json-server
